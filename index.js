@@ -79,7 +79,22 @@ async function run() {
             res.send(result)
         })
 
+        ////get sepecific user using email
+        // app.get('/users/find', async (req, res) => {
+        //     const email = req.query.email;
+        //     // console.log(req.body)
+        //     // const query = { email: email }
+        //     const result = await usersCollection.findOne(email);
+        //     res.send(result);
+        // })
 
+        app.get('/users/:email', async (req, res) => {
+            const email = req.params.email;
+            console.log(email)
+            const query = { email: email }
+            const result = await usersCollection.findOne(query);
+            res.send(result);
+        })
         ////Create data and stored into database
         app.post('/users', async (req, res) => {
             const trainer = req.body
