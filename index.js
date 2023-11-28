@@ -31,7 +31,8 @@ async function run() {
 
         //////COllection lists
         const trainerCollection = client.db('fitnessDB').collection('trainers')
-        const classesCollection = client.db('fitnessDB').collection('classes')
+        const classesCollection = client.db('fitnessDB').collection('classess')
+        const usersCollection = client.db('fitnessDB').collection('users')
 
 
         //////Trainer related api
@@ -63,7 +64,7 @@ async function run() {
             const result = await classesCollection.find().toArray();
             res.send(result)
         })
-        app.get('classes/:id', async (req, res) => {
+        app.get('/classes/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
             const result = await classesCollection.findOne(query);
@@ -71,6 +72,20 @@ async function run() {
         })
 
 
+
+        ////Users related api
+        app.get('/users', async (req, res) => {
+            const result = await usersCollection.find().toArray();
+            res.send(result)
+        })
+
+
+        ////Create data and stored into database
+        app.post('/users', async (req, res) => {
+            const trainer = req.body
+            const result = await usersCollection.insertOne(trainer)
+            res.send(result)
+        })
 
 
 
