@@ -31,8 +31,7 @@ async function run() {
 
         //////COllection lists
         const trainerCollection = client.db('fitnessDB').collection('trainers')
-
-
+        const classesCollection = client.db('fitnessDB').collection('classes')
 
 
         //////Trainer related api
@@ -58,7 +57,18 @@ async function run() {
             res.send(result)
         })
 
+        ////Classes related api
 
+        app.get('/classes', async (req, res) => {
+            const result = await classesCollection.find().toArray();
+            res.send(result)
+        })
+        app.get('classes/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) }
+            const result = await classesCollection.findOne(query);
+            res.send(result);
+        })
 
 
 
