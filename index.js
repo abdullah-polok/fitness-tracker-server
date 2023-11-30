@@ -35,6 +35,9 @@ async function run() {
         const usersCollection = client.db('fitnessDB').collection('users')
 
 
+
+
+
         //////Trainer related api
 
         ////get trainer data from api
